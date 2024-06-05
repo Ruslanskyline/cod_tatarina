@@ -1,14 +1,11 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
-LIBS = -lm
+all: lodepng.o main.o
+	gcc *.o -o main
 
-all: skyline run
+main.o: skyline.c lodepng.h
+	gcc -c skyline.c
 
-skyline: skyline.c lodepng.c lodepng.h
-	$(CC) $(CFLAGS) -o skyline skyline.c lodepng.c $(LIBS)
-
-run: skyline
-	./skyline
+lodepng.o: lodepng.c lodepng.h
+	gcc -c lodepng.c
 
 clean:
-	rm -f skyline
+	rm -f *.o
